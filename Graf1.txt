@@ -1,0 +1,54 @@
+using System;
+class HelloWorld {
+  static void Main() {
+    Console.WriteLine("Алгоритм Прима");
+    Console.WriteLine("Введите колво вершин");
+    int n = Convert.ToInt32(Console.ReadLine());
+    int[,] mas = new int[n,n];
+    int max,min,sum,xn,yn;
+    max = 0;
+    sum = 0;
+    xn = 0;
+    yn = 0;
+    Console.WriteLine("Введите колво рёбер");
+    int r = Convert.ToInt32(Console.ReadLine());
+    for(int i = 0; i < r; i ++){
+        Console.WriteLine("Введите 1 вершину");
+        int x = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Введите 2 вершину");
+        int y = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Введите длину");
+        int m = Convert.ToInt32(Console.ReadLine());
+        mas[x-1,y-1] = m;
+        mas[y-1,x-1] = m;
+        if (max < m) max = m+1;
+    }
+    
+/*    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++){
+            Console.Write(mas[i,j]);
+        }
+        Console.WriteLine("");
+    }*/
+    
+    string s = "1";
+    while (s.Length< n){
+        min = max;
+        foreach(char st in s){
+            string str = Convert.ToString(st);
+            for (int i = 0; i < n ; i++){
+                if ((mas[Convert.ToInt32(str)-1,i] != 0) && (mas[Convert.ToInt32(str)-1,i] < min )&&(s.IndexOf(Convert.ToString(i+1)) == -1)){
+                    min = mas[Convert.ToInt32(str)-1,i];
+                    xn  = Convert.ToInt32(str)-1;
+                    yn  = i;
+                }
+                
+            }
+        }
+        
+        sum += mas[xn,yn];
+        s += Convert.ToString(yn+1);
+    }
+    Console.WriteLine(sum);
+  }
+}
